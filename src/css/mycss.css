@@ -1,3 +1,20 @@
-body {
-    background: white !important;
+.navbar-nav {
+    flex-direction: row;
+}
+.nav li {
+    padding-right: 35px;
+    margin-top: 21px;
+    font-size: 23px;
+}
+.liSpan {
+    margin-left: 20px;
+}
+.imgPlanet {
+    width: 250px;
+    height: 250px;
+}
+.imgPerson {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
 }

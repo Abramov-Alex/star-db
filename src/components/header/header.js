@@ -3,14 +3,16 @@ import React, {Component} from 'react';
 export default class Header extends Component {
     render() {
         return(
-            <>
-                <div className="header">
-                    <h3>
+            <div className="row">
+                <div className="col-md-6">
+                    <h1>
                         <a href="#" style={{color: 'white'}}>
                             Star DB
                         </a>
-                    </h3>
-                    <ul className="">
+                    </h1>
+                </div>
+                <div className="col-md-6">
+                    <ul className="nav navbar-nav">
                         <li>
                             <a href="#">
                                 People
@@ -28,7 +30,7 @@ export default class Header extends Component {
                         </li>
                     </ul>
                 </div>
-            </>
+            </div>
         )
     }
 }

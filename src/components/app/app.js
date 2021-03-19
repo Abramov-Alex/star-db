@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import Header from '../header/header';
-import RandomPlanet from '../random-planet/random-planet';
 import ItemList from '../item-list/item-list';
 import PersonDetails from '../person-details/person-details';
-
+import RandomPlanet from "../random-planet/random-planet";
 import '../../css/mycss.css';
 
 export default class App extends Component {
     render() {
         return(
-            <>
-                123
+            <div className="container">
+                <br/>
                 <Header />
                 <RandomPlanet />
+                <br/>
                 <div className="row">
                     <div className="col-md-6">
                         <ItemList />
@@ -21,7 +21,7 @@ export default class App extends Component {
                         <PersonDetails />
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 }
