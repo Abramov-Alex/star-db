@@ -1,15 +1,18 @@
 import React, {Component} from "react";
 import SwapiService from '../../services/swapi-service'
+import Spinner from "../spinner/spinner";
 
 export default class RandomPlanet extends Component {
 
     swapiServise = new SwapiService();
 
     state = {
+        id: null,
         name: 'Planet Name',
         population: null,
         rotationPeriod: null,
-        diameter: null
+        diameter: null,
+        spinner: true
     };
 
     constructor() {
@@ -18,46 +21,33 @@ export default class RandomPlanet extends Component {
     }
 
     updatePlanet() {
-        this.swapiServise.getAllPlanets(7).then((planet) => {
+        const id = Math.floor(Math.random()*25) +2;
+        this.swapiServise.getPlanet(id).then((planet) => {
             this.setState({
+                id,
                 name: planet.name,
                 population: planet.population,
-                rotationPeriod: planet.rotationPeriod,
-                diameter: planet.diameter
+                rotationPeriod: planet.rotation_period,
+                diameter: planet.diameter,
+                spinner: false
             })
         })
     };
 
     render() {
 
-        const {name, population, rotationPeriod, diameter} = this.state;
+        const {id, name, population, rotationPeriod, diameter, spinner} = this.state;
+
+        const loading = spinner ? <Spinner /> : null;
+        const content = !spinner ? <RandomPlanet planet={...props}/> : null;
 
         return(
             <div className="row">
                 <div className="col-md-12">
                     <div className="card" style={{padding: "20px"}}>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <img className="imgPlanet" alt="?" src=""/>
-                            </div>
-                            <div className="col-md-6">
-                                <h4>{name}</h4>
-                                <ul className="item-list list-group">
-                                    <li className="list-group-item">
-                                        <span>Population</span>
-                                        <span className="liSpan">{population}</span>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span>Rotation Period</span>
-                                        <span className="liSpan">{rotationPeriod}</span>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span>Diameter</span>
-                                        <span className="liSpan">{diameter}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        {loading}
+                        {content}
+                        >
                     </div>
                 </div>
             </div>
