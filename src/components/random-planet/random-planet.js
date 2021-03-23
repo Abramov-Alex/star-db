@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import SwapiService from '../../services/swapi-service'
 import Spinner from "../spinner/spinner";
+import RandomPlanetDetail from "./random-planet-detail";
 
 export default class RandomPlanet extends Component {
 
@@ -8,7 +9,7 @@ export default class RandomPlanet extends Component {
 
     state = {
         id: null,
-        name: 'Planet Name',
+        name: null,
         population: null,
         rotationPeriod: null,
         diameter: null,
@@ -18,7 +19,7 @@ export default class RandomPlanet extends Component {
     constructor() {
         super();
         this.updatePlanet();
-    }
+    };
 
     updatePlanet() {
         const id = Math.floor(Math.random()*25) +2;
@@ -31,7 +32,7 @@ export default class RandomPlanet extends Component {
                 diameter: planet.diameter,
                 spinner: false
             })
-        })
+        });
     };
 
     render() {
@@ -39,7 +40,14 @@ export default class RandomPlanet extends Component {
         const {id, name, population, rotationPeriod, diameter, spinner} = this.state;
 
         const loading = spinner ? <Spinner /> : null;
-        const content = !spinner ? <RandomPlanet planet={...props}/> : null;
+        const content = !spinner ?
+            <RandomPlanetDetail
+                id={id}
+                name={name}
+                population={population}
+                rotationPeriod={rotationPeriod}
+                diameter={diameter}
+            /> : null;
 
         return(
             <div className="row">
@@ -47,7 +55,6 @@ export default class RandomPlanet extends Component {
                     <div className="card" style={{padding: "20px"}}>
                         {loading}
                         {content}
-                        >
                     </div>
                 </div>
             </div>
